@@ -1,0 +1,10 @@
+node_modules
+tmp
+dist
+build
+.vscode
+*.log
+.DS_Store
+.rts2_cache_cjs
+.rts2_cache_esm
+.rts2_cache_umd

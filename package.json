@@ -1,0 +1,42 @@
+{
+  "name": "@east0422/vite-plugin-git-version",
+  "version": "1.0.0",
+  "description": "A simple vite plugin that generate version and commit info during build",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format cjs,esm",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "git",
+    "vite",
+    "version"
+  ],
+  "author": "east0422",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/east0422/vite-plugin-git-version/issues",
+    "email": "694292191@qq.com"
+  },
+  "homepage": "https://github.com/east0422/vite-plugin-git-version",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/east0422/vite-plugin-git-version.git"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.25",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.3"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

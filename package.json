@@ -4,8 +4,9 @@
   "description": "A simple vite plugin that generate version and commit info during build",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "commonjs",
   "files": [
-    "src/"
+    "dist/"
   ],
   "scripts": {
     "build": "tsup src/index.ts --dts --format cjs,esm",

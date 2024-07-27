@@ -35,8 +35,12 @@ jobs:
           git config user.email "actions@github.com"
           git tag -d "v${{ env.VERSION }}"
           git push origin --delete "v${{ env.VERSION }}"
+
+      - name: Checkout main
+        run: |
+          git fetch origin
           git checkout main
-          git pull origin main
+          git merge origin/main
 
       - name: Bump version in package.json
         run: |

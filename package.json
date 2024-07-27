@@ -1,5 +1,5 @@
 {
-  "name": "@east0422/vite-plugin-git-version",
+  "name": "@mirolago/vite-plugin-git-version",
   "version": "1.0.0",
   "description": "A simple vite plugin that generate version and commit info during build",
   "main": "./dist/index.js",
@@ -17,19 +17,19 @@
     "vite",
     "version"
   ],
-  "author": "east0422",
+  "author": "east0422, mirolago",
   "license": "ISC",
   "publishConfig": {
     "access": "public"
   },
   "bugs": {
-    "url": "https://github.com/east0422/vite-plugin-git-version/issues",
+    "url": "https://github.com/mirolago/vite-plugin-git-version/issues",
     "email": "694292191@qq.com"
   },
-  "homepage": "https://github.com/east0422/vite-plugin-git-version",
+  "homepage": "https://github.com/mirolago/vite-plugin-git-version",
   "repository": {
     "type": "git",
-    "url": "https://github.com/east0422/vite-plugin-git-version.git"
+    "url": "https://github.com/mirolago/vite-plugin-git-version.git"
   },
   "devDependencies": {
     "@types/node": "^20.11.25",
@@ -39,5 +39,8 @@
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "simple-git": "^3.25.0"
   }
 }

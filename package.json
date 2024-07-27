@@ -1,6 +1,6 @@
 {
   "name": "@mirolago/vite-plugin-git-version",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "A simple vite plugin that generate version and commit info during build",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

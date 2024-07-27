@@ -23,8 +23,7 @@
     "access": "public"
   },
   "bugs": {
-    "url": "https://github.com/mirolago/vite-plugin-git-version/issues",
-    "email": "694292191@qq.com"
+    "url": "https://github.com/mirolago/vite-plugin-git-version/issues"
   },
   "homepage": "https://github.com/mirolago/vite-plugin-git-version",
   "repository": {

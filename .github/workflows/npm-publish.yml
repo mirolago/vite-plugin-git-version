@@ -33,6 +33,7 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
+          git tag -d "v${{ env.VERSION }}"
           git push origin --delete "v${{ env.VERSION }}"
 
       - name: Bump version in package.json

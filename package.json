@@ -40,6 +40,7 @@
     "node": ">=14.0.0"
   },
   "dependencies": {
+    "date-fns": "^3.6.0",
     "simple-git": "^3.25.0"
   }
 }

@@ -1,5 +1,7 @@
 import fs from 'fs'
 import path from 'path'
+import { format } from 'date-fns'
+
 
 import simpleGit, {SimpleGit, SimpleGitOptions} from 'simple-git'
 
@@ -46,7 +48,7 @@ const getCommitInfo = async (): Promise<CommitInfo> => {
 async function getGitVersionInfo() {
   const commitInfo = await getCommitInfo();
 
-  const buildTime = (new Date()).toISOString()
+  const buildTime = format(new Date(), "yyyy-MM-dd'T'HH:mm:ssXXX")
 
   const packageJsonPath = path.resolve(process.cwd(), 'package.json')
   let packageInfo: any = {}

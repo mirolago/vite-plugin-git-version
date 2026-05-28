@@ -24,7 +24,13 @@ const getCommitInfo = async (): Promise<CommitInfo> => {
   try {
     // Get the current branch name
     const branchSummary = await git.branch();
-    const currentBranch = branchSummary.current;
+    // In Azure DevOps the checkout is detached HEAD, so branchSummary.current is empty.
+    // Fall back to the env vars that Azure DevOps always provides.
+    const currentBranch =
+      branchSummary.current ||
+      process.env.BUILD_SOURCEBRANCHNAME ||
+      (process.env.BUILD_SOURCEBRANCH ?? '').replace(/^refs\/heads\//, '') ||
+      'unknown';
 
     // Get the latest commit information
     const log = await git.log(['-1']); // Get the most recent commit
@@ -45,10 +51,27 @@ const getCommitInfo = async (): Promise<CommitInfo> => {
   }
 };
 
+function formatBuildTimeInCommitTz(commitDate: string): string {
+  // commitDate from simple-git is ISO 8601 with offset, e.g. "2026-05-28T10:30:00+02:00" or "2026-05-28 10:30:00 +0200"
+  const tzMatch = commitDate.match(/([+-]\d{2}:?\d{2})$/)
+  if (!tzMatch) {
+    return format(new Date(), "yyyy-MM-dd'T'HH:mm:ssXXX")
+  }
+  const raw = tzMatch[1]
+  // Normalize to "+HH:MM"
+  const tzOffset = raw.includes(':') ? raw : `${raw.slice(0, 3)}:${raw.slice(3)}`
+  const sign = tzOffset[0] === '+' ? 1 : -1
+  const offsetMs = sign * (parseInt(tzOffset.slice(1, 3)) * 60 + parseInt(tzOffset.slice(4))) * 60000
+  const now = new Date()
+  // date-fns format() uses local time, shift the Date to trick it into formatting in target tz
+  const shifted = new Date(now.getTime() + offsetMs + now.getTimezoneOffset() * 60000)
+  return format(shifted, "yyyy-MM-dd'T'HH:mm:ss") + tzOffset
+}
+
 async function getGitVersionInfo() {
   const commitInfo = await getCommitInfo();
 
-  const buildTime = format(new Date(), "yyyy-MM-dd'T'HH:mm:ssXXX")
+  const buildTime = formatBuildTimeInCommitTz(commitInfo.date)
 
   const packageJsonPath = path.resolve(process.cwd(), 'package.json')
   let packageInfo: any = {}
